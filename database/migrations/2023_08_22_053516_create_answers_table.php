@@ -13,12 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('question_category', function (Blueprint $table) {
+        Schema::create('answers', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('category');
+            $table->unsignedInteger('question_id');
+            $table->foreign('question_id')->references('id')->on('questions');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('user');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->text('content');
+            $table->boolean('is_valid')->default(false);
+            $table->integer('vote')->default(0);
             $table->timestamps();
         });
     }
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('question_category');
+        Schema::dropIfExists('answer');
     }
 };
