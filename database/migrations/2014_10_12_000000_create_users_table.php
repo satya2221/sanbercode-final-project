@@ -17,10 +17,10 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name', 45);
             $table->string('email', 45)->unique();
-            $table->string('password', 45);
-            $table->text('bio');
-            $table->integer('age');
-            $table->string('address', 45);
+            $table->string('password', 128);
+            $table->text('bio')->nullable();
+            $table->integer('age')->nullable();
+            $table->string('address', 45)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
