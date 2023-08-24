@@ -98,7 +98,13 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                  document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </div>
             </div>
         </div>
@@ -115,11 +121,11 @@
     <script src="{{ asset('sb_admin/js/sb-admin-2.min.js') }}"></script>
 
     <!-- Page level plugins -->
-    <script src="{{ asset('sb_admin/vendor/chart.js/Chart.min.js') }}"></script>
+    {{-- <script src="{{ asset('sb_admin/vendor/chart.js/Chart.min.js') }}"></script> --}}
 
     <!-- Page level custom scripts -->
-    <script src="{{ asset('sb_admin/js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('sb_admin/js/demo/chart-pie-demo.js') }}"></script>
+    {{-- <script src="{{ asset('sb_admin/js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('sb_admin/js/demo/chart-pie-demo.js') }}"></script> --}}
 
     {{-- Extra JS can be put here if any --}}
     @stack('script')
