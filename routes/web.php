@@ -24,3 +24,7 @@ Route::resource('categories', App\Http\Controllers\CategoryController::class);
 Route::resource('questions', App\Http\Controllers\QuestionController::class);
 
 Route::get('/user_question', [App\Http\Controllers\QuestionController::class, 'user_question']);
+
+Route::post('/', [App\Http\Controllers\QuestionController::class, 'search']);
+
+Route::post('/user_question', [App\Http\Controllers\QuestionController::class, 'search_user_question']);
