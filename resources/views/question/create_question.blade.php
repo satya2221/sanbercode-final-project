@@ -18,6 +18,19 @@
                     @enderror
                 </div>
                 <div class="form-group">
+                    <label for="category">Question Category</label>
+                    <select name="category[]" id="select-category" class="form-control" multiple="multiple">
+                        @foreach ($categories as $category)
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
+                    </select>
+                    @error('category')
+                        <div class="alert alert-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="form-group">
                     <label for="content">Question Content</label>
                     <textarea name="content" class="form-control" id="input-content" cols="30" rows="10" placeholder="Question Content"></textarea>
                     @error('content')
@@ -34,6 +47,7 @@
 @endsection
 
 @push('script')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
@@ -62,5 +76,11 @@
                 }
             });
         });
+
+        $('select').selectpicker('refresh');
     </script>
+@endpush
+
+@push('css')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 @endpush

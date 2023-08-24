@@ -34,4 +34,5 @@
             </div>
         </div>
      @endforelse
+     @include('sweetalert::alert')
 @endsection

@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('replies', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('answer_id');
-            $table->foreign('answer_id')->references('id')->on('answers');
+            $table->foreign('answer_id')->references('id')->on('answers')->onDelete('cascade');
             $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('content');
             $table->timestamps();
         });

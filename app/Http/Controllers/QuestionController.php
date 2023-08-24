@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Question;
+use App\Models\Category;
+use App\Models\QuestionCategory;
 use Alert;
 
 class QuestionController extends Controller
@@ -20,22 +22,33 @@ class QuestionController extends Controller
     public function create()
     {
         if (!Auth::check()) return redirect('/login');
+
+        $categories = Category::all();
         
-        return view('question.create_question');
+        return view('question.create_question', compact('categories'));
     }
 
     public function store(Request $request)
     {  
         $request->validate([
             'title' => 'required|max:45',
-            'content' => 'required'
+            'content' => 'required',
+            'category' => 'required'
         ]);
 
-        Question::create([
+        $question = Question::create([
             'user_id' => Auth::id(),
     		'title' => $request['title'],
             'content' => $request['content']
     	]);
+
+        for ($i = 0; $i < sizeof($request['category']); $i++)
+        {
+            QuestionCategory::create([
+                'category_id' => $request['category'][$i],
+                'question_id' => $question->id
+            ]);
+        }
 
         return redirect()->route('questions.index')->with('success','Question successfully posted');
     }
@@ -51,20 +64,34 @@ class QuestionController extends Controller
     {
         $question = Question::find($id);
 
-        return view('question.edit_question', compact('question'));
+        $categories = Category::all();
+
+        return view('question.edit_question', compact('question', 'categories'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
             'title' => 'required|max:45',
-            'content' => 'required'
+            'content' => 'required',
+            'category' => 'required'
         ]);
 
-        Question::find($id)->update([
-    		'title' => $request->title,
-            'content' => $request->content
+        $question = Question::find($id)->update([
+            'user_id' => Auth::id(),
+    		'title' => $request['title'],
+            'content' => $request['content']
     	]);
+
+        $question_category = QuestionCategory::where('question_id', $id)->delete();
+
+        for ($i = 0; $i < sizeof($request['category']); $i++)
+        {
+            QuestionCategory::create([
+                'category_id' => $request['category'][$i],
+                'question_id' => $id
+            ]);
+        }
 
         return redirect('/user_question')->with('success','Question updated successfully');
     }
@@ -73,14 +100,12 @@ class QuestionController extends Controller
     {
         $question = Question::find($id)->delete();
 
-        return back();
+        return back()->with('Success', 'Question deleted successfully');
     }
 
     public function user_question()
     {
         $questions = Question::where('user_id', Auth::id())->orderBy('created_at')->get();
-
-        confirmDelete('Delete Question', 'Are you sure you want to delete this question?');
 
         return view('question.user_question', compact('questions'));
     }

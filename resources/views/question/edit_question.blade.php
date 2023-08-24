@@ -19,6 +19,23 @@
                     @enderror
                 </div>
                 <div class="form-group">
+                    <label for="category">Question Category</label>
+                    <select name="category[]" id="select-category" class="form-control" multiple="multiple">
+                        @foreach ($categories as $category)
+                            @if (in_array($category->id, $question->question_category->pluck('category_id')->toArray()))
+                                <option value="{{$category->id}}" selected>{{$category->name}}</option>
+                            @else
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                    @error('category')
+                        <div class="alert alert-danger">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="form-group">
                     <label for="content">Question Content</label>
                     <textarea name="content" class="form-control" id="input-content" cols="30" rows="10" placeholder="Question Content">{!!$question->content!!}</textarea>
                     @error('content')
