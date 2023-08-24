@@ -28,9 +28,9 @@
             </div>
         </div>
     @empty
-        <div class="row mt-4"></div>
+        <div class="row mt-4">
             <div class="col-12">
-                There are no question right now
+                <p>There are no question right now</p>
             </div>
         </div>
      @endforelse

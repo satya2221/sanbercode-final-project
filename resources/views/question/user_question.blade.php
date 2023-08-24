@@ -44,7 +44,7 @@
             </div>
         </div>
     @empty
-        <div class="row mt-4"></div>
+        <div class="row mt-4">
             <div class="col-12">
                 You have not post any question yet
             </div>
