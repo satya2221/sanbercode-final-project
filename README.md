@@ -16,5 +16,5 @@ Aplikasi tanya jawab
 
 ## ERD
 
-![alt text](https://github.com/shughinurhalim/sanbercode-project/blob/update_readme/ERD.png?raw=true)
+![picture alt](https://drive.google.com/file/d/11uXie0mzjOBACSE-_13M2oE4O3gbHIGJ/view?usp=sharing "Sanbercode Final project ERD")
 
