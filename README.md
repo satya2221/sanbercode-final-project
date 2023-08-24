@@ -16,5 +16,5 @@ Aplikasi tanya jawab
 
 ## ERD
 
-![picture alt](https://drive.google.com/file/d/11uXie0mzjOBACSE-_13M2oE4O3gbHIGJ/view?usp=sharing "Sanbercode Final project ERD")
+![picture alt](https://drive.google.com/uc?export=view&id=11uXie0mzjOBACSE-_13M2oE4O3gbHIGJ "Sanbercode Final project ERD")
 
