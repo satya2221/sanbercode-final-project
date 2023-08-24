@@ -16,7 +16,20 @@ class QuestionController extends Controller
     {
         $questions = Question::all();
 
-        return view('all_questions', compact('questions'));
+        return view('all_questions')->with([
+            'questions' => $questions,
+            'search' => ''
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $questions = Question::whereRaw("UPPER(title) LIKE '%". strtoupper($request['search'])."%'")->get(); 
+
+        return view('all_questions')->with([
+            'questions' => $questions,
+            'search' => $request['search']
+        ]);
     }
 
     public function create()
@@ -107,6 +120,19 @@ class QuestionController extends Controller
     {
         $questions = Question::where('user_id', Auth::id())->orderBy('created_at')->get();
 
-        return view('question.user_question', compact('questions'));
+        return view('question.user_question')->with([
+            'questions' => $questions,
+            'search' => ''
+        ]);
+    }
+
+    public function search_user_question(Request $request)
+    {
+        $questions = Question::whereRaw("user_id = " . Auth::id() . " AND UPPER(title) LIKE '%". strtoupper($request['search'])."%'")->orderBy('created_at')->get();
+
+        return view('question.user_question')->with([
+            'questions' => $questions,
+            'search' => $request['search']
+        ]);
     }
 }
