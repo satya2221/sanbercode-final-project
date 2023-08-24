@@ -13,13 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.master');
-});
+Route::get('/', [App\Http\Controllers\QuestionController::class, 'index']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 // Route resource for Category
 Route::resource('categories', App\Http\Controllers\CategoryController::class);
+
+// Route resource for Question
+Route::resource('questions', App\Http\Controllers\QuestionController::class);
+
+Route::get('/user_question', [App\Http\Controllers\QuestionController::class, 'user_question']);
