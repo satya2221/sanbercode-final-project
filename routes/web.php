@@ -28,3 +28,8 @@ Route::get('/user_question', [App\Http\Controllers\QuestionController::class, 'u
 Route::post('/', [App\Http\Controllers\QuestionController::class, 'search']);
 
 Route::post('/user_question', [App\Http\Controllers\QuestionController::class, 'search_user_question']);
+
+// Route resource for Answer
+Route::resource('answers', App\Http\Controllers\AnswerController::class);
+Route::get('/answers/create/{id_question}', [App\Http\Controllers\AnswerController::class, 'create'])->name('answer.id.create');
+Route::get('/user_answer', [App\Http\Controllers\AnswerController::class, 'user_answer'])->name('answered.by.user');

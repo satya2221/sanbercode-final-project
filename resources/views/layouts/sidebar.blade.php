@@ -25,11 +25,11 @@
                     <i class="fas fa-fw fa-grip-lines"></i>
                     <span>All categories</span></a>
             </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
         @endif
     @endguest
     
-    <!-- Divider -->
-    <hr class="sidebar-divider">
 
     <!-- Heading -->
     <div class="sidebar-heading">
@@ -52,6 +52,20 @@
                 <span>My Questions</span>
             </a>
         </li>
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <div class="sidebar-heading">
+            Answers
+        </div>
+        <!-- Nav Item - Question Menu -->
+        <li class="nav-item" id="sidebar-all-questions">
+            <a class="nav-link" href="{{ route('answered.by.user') }}" >
+                <i class="fa-solid fa-question"></i>
+                <span>My Answer</span>
+            </a>
+        </li>
+
     @endguest
     <!-- Nav Item - Pages Collapse Menu -->
     {{-- <li class="nav-item">

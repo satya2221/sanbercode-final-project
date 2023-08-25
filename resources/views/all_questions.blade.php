@@ -25,12 +25,13 @@
     @forelse ($questions as $question)
         <div class="row mt-4">
             <div class="col-12">
-                <div class="card">
-                    <div class="card-header">Ask by {{$question->user->name}}</div>
+                <div class="card shadow">
+                    <div class="card-header">Ask by {{$question->user->name}}
+                    </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
-                                <a href="{{route('questions.show', $question->id)}}">{{$question->title}}</a>
+                                <a href="{{route('answers.show', $question->id)}}">{{$question->title}}</a>
                             </div>
                         </div>
                         <div class="row">
@@ -38,6 +39,16 @@
                                 {!!$question->content!!}
                             </div>
                         </div>
+                    </div>
+                    <div class="card-footer">
+                        <span class="float-right">
+                            @guest
+                                <a href="{{route('answers.show', $question->id)}}" class="btn btn-success">See Answer</a>
+                            @else
+                                <a href="{{route('answers.show', $question->id)}}" class="btn btn-success">See Answer</a>
+                                <a href="{{route('answer.id.create', $question->id)}}" class="btn btn-primary">Answer this</a>
+                            @endguest
+                        </span>
                     </div>
                 </div>
             </div>
