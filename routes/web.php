@@ -33,3 +33,6 @@ Route::post('/user_question', [App\Http\Controllers\QuestionController::class, '
 Route::resource('answers', App\Http\Controllers\AnswerController::class);
 Route::get('/answers/create/{id_question}', [App\Http\Controllers\AnswerController::class, 'create'])->name('answer.id.create');
 Route::get('/user_answer', [App\Http\Controllers\AnswerController::class, 'user_answer'])->name('answered.by.user');
+
+// Route for User Profile
+Route::resource('users', App\Http\Controllers\UserController::class);
