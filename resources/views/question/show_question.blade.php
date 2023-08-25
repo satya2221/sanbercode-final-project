@@ -13,7 +13,7 @@
 
 <h3>Jawaban</h3>
 @forelse ($answers as $answer)
-    <div class="card shadow border-left-info">
+    <div class="card shadow border-left-info mb-3">
         <div class="card-header">
             <h6 class="m-0 font-weight-bold text-primary">Answer by {{$answer->user->name}}</h6>
         </div>
@@ -21,7 +21,6 @@
             {!!$answer->content!!}
         </div>
     </div>
-    
 @empty 
     <p>Belum ada jawaban</p>
 @endforelse
