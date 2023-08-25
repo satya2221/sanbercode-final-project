@@ -1,44 +1,28 @@
 @extends('layouts.master')
-
-@section('search')
-    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" method="POST" action="/user_question">
-        @csrf
-        <div class="input-group">
-            <input type="text" class="form-control bg-light border-0 small" name="search" placeholder="Search for..."
-                aria-label="Search" aria-describedby="basic-addon2" value="{{$search}}">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">
-                    <i class="fas fa-search fa-sm"></i>
-                </button>
-            </div>
-        </div>
-    </form>
-@endsection
-
 @section('content')
-    <h1>All of Your Question</h1>
+    <h1>All of Your Answer</h1>
     <div class="row">
         <div class="col-4">
-            <a href="{{route('questions.create')}}" class="btn btn-primary">Ask another Question</a>
+            <a href="/" class="btn btn-primary">Answer another Question</a>
         </div>
     </div>
 
     @include('sweetalert::alert')
     
-    @forelse ($questions as $question)
+    @forelse ($answers as $answer)
         <div class="row mt-4">
             <div class="col-12">
                 <div class="card shadow">
                     <div class="card-header">
-                        <a href="{{route('answers.show', $question->id)}}">{{$question->title}}</a>
+                        <a href="{{route('answers.show', $answer->question->id)}}">{{$answer->question->title}}</a>
                         {{-- Ask by {{$question->user->name}} --}}
                         <span class="float-right">
-                            <a href="{{route('questions.edit', $question->id)}}"><i class="fas fa-edit"></i></a>
+                            <a href="{{route('answers.edit', $answer->id)}}"><i class="fas fa-edit"></i></a>
                             {{-- <a href="{{route('questions.destroy', $question->id)}}" data-confirm-delete="true"><i class="fas fa-trash"></i></a> --}}
-                            <a href="" onclick="confirmDelete({{$question->id}})">
+                            <a href="" onclick="confirmDelete({{$answer->id}})">
                                 <i class="fas fa-trash"></i>
                             </a>
-                            <form id="delete-question-{{ $question->id }}" action="{{ route('questions.destroy', $question->id) }}"
+                            <form id="delete-answer-{{ $answer->id }}" action="{{ route('answers.destroy', $answer->id) }}"
                                 method="POST" style="display: none;">
                                @csrf
                                @method('DELETE')
@@ -51,9 +35,10 @@
                                 <a href="{{route('questions.show', $question->id)}}">{{$question->title}}</a>
                             </div>
                         </div> --}}
+                        <code>Your Answer:</code>
                         <div class="row">
                             <div class="col-12">
-                                {!!$question->content!!}
+                                {!!$answer->content!!}
                             </div>
                         </div>
                     </div>
@@ -63,7 +48,7 @@
     @empty
         <div class="row mt-4">
             <div class="col-12">
-                You have not post any question yet
+                You have not post any answer yet
             </div>
         </div>
     @endforelse
@@ -78,17 +63,18 @@
         {
             event.preventDefault();
             new swal({
-                title: "Delete Question",
-                text: "Are you sure you want to delete this question?",
+                title: "Delete Answer",
+                text: "Are you sure you want to delete this answer?",
                 icon: "info",
                 type: "info",
                 showCancelButton: true,
                 showConfirmButton: true
             }).then((willDelete) => {
                     if (willDelete.isConfirmed) {
-                        $(`#delete-question-${$id}`).submit();
+                        $(`#delete-answer-${$id}`).submit();
                 }
             });
         }
     </script>
+    @include('sweetalert::alert')
 @endpush
