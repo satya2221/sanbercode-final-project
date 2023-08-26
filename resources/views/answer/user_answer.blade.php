@@ -17,10 +17,10 @@
                         <a href="{{route('answers.show', $answer->question->id)}}">{{$answer->question->title}}</a>
                         {{-- Ask by {{$question->user->name}} --}}
                         <span class="float-right">
-                            <a href="{{route('answers.edit', $answer->id)}}"><i class="fas fa-edit"></i></a>
+                            <a href="{{route('answers.edit', $answer->id)}}"><i class="fas fa-edit ml-2"></i></a>
                             {{-- <a href="{{route('questions.destroy', $question->id)}}" data-confirm-delete="true"><i class="fas fa-trash"></i></a> --}}
                             <a href="" onclick="confirmDelete({{$answer->id}})">
-                                <i class="fas fa-trash"></i>
+                                <i class="fas fa-trash ml-2"></i>
                             </a>
                             <form id="delete-answer-{{ $answer->id }}" action="{{ route('answers.destroy', $answer->id) }}"
                                 method="POST" style="display: none;">

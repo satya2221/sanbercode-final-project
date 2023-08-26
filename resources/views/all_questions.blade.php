@@ -36,9 +36,10 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                {!!$question->content!!}
+                                <p>#{{implode(' #', $question->category->pluck('name')->toArray())}}</p>
                             </div>
                         </div>
+                        <p class="card-text">{!! $question->content !!}</p>
                     </div>
                     <div class="card-footer">
                         <span class="float-right">

@@ -20,8 +20,6 @@ return new class extends Migration
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->text('content');
-            $table->boolean('is_valid')->default(false);
-            $table->integer('vote')->default(0);
             $table->timestamps();
         });
     }

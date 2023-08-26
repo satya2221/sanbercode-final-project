@@ -7,6 +7,11 @@
         <h6 class="m-0 font-weight-bold text-primary">Asked by {{ $question->name }}</h6>
     </div>
     <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <p>#{{implode(' #', $question->category->pluck('name')->toArray())}}</p>
+            </div>
+        </div>
         <p class="card-text">{!! $question->content !!}</p>
     </div>
 </div>
@@ -18,7 +23,11 @@
             <h6 class="m-0 font-weight-bold text-primary">Answer by {{$answer->user->name}}</h6>
         </div>
         <div class="card-body">
-            {!!$answer->content!!}
+            <div class="row">
+                <div class="col-12">
+                    {!!$answer->content!!}
+                </div>
+            </div>
         </div>
     </div>
 @empty 
