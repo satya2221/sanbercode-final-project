@@ -17,8 +17,9 @@ class Question extends Model
     {
         return $this->hasMany(QuestionCategory::class, 'question_id', 'id');
     }
-    public function answer()
+
+    public function category()
     {
-        return $this->hasMany(Answer::class, 'question_id', 'id');
+        return $this->belongsToMany(Category::class, 'question_categories');
     }
 }

@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('title', 45);
             $table->text('content');
-            $table->integer('vote')->default(0);
             $table->timestamps();
         });
     }
